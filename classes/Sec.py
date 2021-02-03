@@ -9,7 +9,7 @@ from globals import globalvars
 import datetime
 
 class ExtendedRegisterForm(RegisterForm):
-    username = StringField('username', [validators.Regexp("[^' ']+"), Required()])
+    username = StringField('username', [validators.Regexp(r'^[\w]+$', message='Username contains invalid characters')])
     email = StringField('email', [Required()])
     if globalvars.recaptchaEnabled is True:
         recaptcha = RecaptchaField()
@@ -27,7 +27,7 @@ class ExtendedRegisterForm(RegisterForm):
         return success
 
 class ExtendedConfirmRegisterForm(ConfirmRegisterForm):
-    username = StringField('username', [validators.Regexp("[^' ']+"), Required()])
+    username = StringField('username', [validators.Regexp(r'^[\w]+$', message='Username contains invalid characters')])
     email = StringField('email', [Required()])
     if globalvars.recaptchaEnabled is True:
         recaptcha = RecaptchaField()
